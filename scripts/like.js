@@ -1,16 +1,41 @@
-/* этот скрипт использует такие имена классов:
-✦ like-icon — для svg-иконки анимированного сердца
-✦ card__like-button — для кнопки Like рядом с иконкой
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
-✦ button__text — для обозначения текстового элемента внутри кнопки
-Если эти классы поменять в HTML, скрипт перестанет работать. Будьте аккуратны.
-*/
-
 const likeHeartArray = document.querySelectorAll('.like-icon');
 const likeButtonArray = document.querySelectorAll('.card__like-button');
 const iconButtonArray = document.querySelectorAll('.card__icon-button');
+const themeButtons = document.querySelectorAll('.theme-menu__button');
+
+function applyTheme(theme) {
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const realTheme = theme === 'auto' ? (prefersDark ? 'dark' : 'light') : theme;
+  document.documentElement.setAttribute('data-theme', realTheme);
+}
+
+function setTheme(theme) {
+  localStorage.setItem('theme', theme);
+  applyTheme(theme);
+
+  themeButtons.forEach(button => {
+    button.disabled = button.dataset.theme === theme;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('theme') || 'auto';
+  setTheme(savedTheme);
+});
+
+// Обновлять тему при изменении системных настроек, если выбран "auto"
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'auto') {
+    applyTheme('auto');
+  }
+});
+
+themeButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    setTheme(button.dataset.theme);
+  });
+});
 
 iconButtonArray.forEach((iconButton, index) => {
   iconButton.onclick = () =>
