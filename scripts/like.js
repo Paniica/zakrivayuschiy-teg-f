@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTheme(savedTheme);
 });
 
-// Обновлять тему при изменении системных настроек, если выбран "auto"
+
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'auto') {

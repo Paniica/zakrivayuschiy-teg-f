@@ -187,11 +187,10 @@
   filter: brightness(1) contrast(1.5) blur(2px);
 }
 
-@supports not (-webkit-text-stroke: 1px var(--outline-color)) {
+@supports (-webkit-text-stroke: 1px var(--outline-color)) {
   .image-text {
-    text-shadow: -1px -1px 0 var(--outline-color),
-      1px -1px 0 var(--outline-color), -1px 1px 0 var(--outline-color),
-      1px 1px 0 var(--outline-color);
+    text-shadow: none;
+    -webkit-text-stroke: 1px var(--outline-color);
   }
 }
 
@@ -205,6 +204,7 @@
 }
 
 .article__title {
+  text-align: start;
   padding: 7px 11px 4px 12px;
   font-family: var(--main-font, Arial), sans-serif;
   font-size: 18px;
@@ -221,41 +221,21 @@
   font-variation-settings: "wght" var(--font-weight-main);
 }
 
-:root {
-  --accent-color: #000;
-  --main-background: #fff;
-}
-
 [data-theme="dark"] {
-  --background-image: none;
   --accent-color: #fff;
   --main-background: #000;
+  --icon-hover-color: #fff;
 }
 
 [data-theme="light"] {
-
   --accent-color: #000;
   --main-background: #fff;
 }
 
 body {
-
   font-family: Arial, sans-serif;
   text-align: center;
   transition: background 0.3s, color 0.3s;
-}
-
-/* Светлая тема (по умолчанию) */
-body.light {
-  background: #ffffff;
-  color: #000000;
-  background-image: var(--background-image);
-}
-
-/* Тёмная тема */
-body.dark {
-  background: #121212;
-  color: #ffffff;
 }
 
 .card {
@@ -270,7 +250,7 @@ body.dark {
 .button {
   position: relative;
   border: 2px solid var(--accent-color);
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow var(--transition-time) ease-in-out;
 }
 
 .button:focus {
@@ -279,7 +259,6 @@ body.dark {
 
 .button:focus-visible {
   box-shadow: 2px 2px 0 0 var(--accent-color);
-  transition: box-shadow var(--transition-time) ease-in-out;
 }
 
 .button::before {
@@ -338,8 +317,8 @@ body.dark {
 
 .icon-floppy {
   z-index: 2;
-  width: 28px;
-  height: 28px;
+  width: 21px;
+  height: 21px;
   color: var(--text-color-button);
   mix-blend-mode: difference;
 }
@@ -411,7 +390,7 @@ body.dark {
   transition: stroke 0.1s linear;
 }
 
-.footer {
+.button_wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -423,7 +402,6 @@ body.dark {
   position: fixed;
   inset: 0;
   max-width: 341px;
-  min-height: 191px;
   border: 2px solid var(--accent-color);
   background: var(--main-background);
 }
@@ -494,8 +472,23 @@ body.dark {
   }
 
   .image-text {
+    position: absolute;
     top: 25px;
-    right: 25px;
+    right: 13px;
+    opacity: 0.5;
+    color: var(--accent-color);
+    font-family: var(--accent-font, "VT323"), monospace;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0;
+    text-align: left;
+    mix-blend-mode: hard-light;
+    text-shadow: -1px -1px 0 var(--outline-color),
+      1px -1px 0 var(--outline-color),
+      -1px 1px 0 var(--outline-color),
+      1px 1px 0 var(--outline-color);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
   }
 
   .floppy-button {
@@ -505,14 +498,13 @@ body.dark {
     min-height: 54px;
   }
 
-  .icon-floppy {
+  .icon-floppy-button {
     width: 21px;
     height: 21px;
   }
 
   .dialog {
     max-width: 357px;
-    min-height: 193px;
   }
 
   .dialog-content {
