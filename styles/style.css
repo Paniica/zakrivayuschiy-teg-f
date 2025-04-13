@@ -110,7 +110,7 @@
 }
 
 .theme-menu__button:disabled::before {
-  content: "▶️";
+  content: "▶";
   position: absolute;
   top: 0;
   left: -13px;
@@ -430,6 +430,7 @@ body {
 .icon-floppy-dialog {
   color: var(--icon-hover-color);
 }
+
 @media (min-width: 376px) {
   .header {
     align-self: center;
@@ -514,5 +515,10 @@ body {
   .image-text {
     top: 25px;
     right: 13px;
+  }
+
+  .icon-floppy {
+    width: 28px;
+    height: 28px;
   }
 }
