@@ -11,21 +11,19 @@
   min-inline-size: 320px;
   min-block-size: 100dvb;
   font-variation-settings: "wght" var(--font-weight-main);
+  padding-top: 100px;
 }
 
 .header {
-  width: 696px;
-  height: 364px;
-  margin: 100px auto;
-  padding: 55px;
+  border: 2px solid currentColor;
+  padding: 100px;
   background-color: #fff;
-  border: 2px solid #000;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   font-family: "Press Start 2P", monospace;
-  gap: 10px;
+  gap: 8px;
 }
 
 .header--width {
@@ -33,13 +31,13 @@
 }
 
 .header__logo {
-  padding: 0;
+  padding-top: 21px;
   margin-bottom: 20px;
   font-size: clamp(3.063rem, 2.71rem + 1.502vw, 4.063rem);
 }
 
 .header__title {
-  padding: 0;
+  padding-bottom: 23px;
   font-weight: 400;
   font-size: clamp(0.875rem, 0.226rem + 2.7692vw, 1.4375rem);
   line-height: 14px;
@@ -47,8 +45,9 @@
 }
 
 .main {
+  padding-top: 100px;
   display: grid;
-  gap: 50px;
+  gap: 49px;
 }
 
 .image-wrapper {
@@ -74,6 +73,8 @@
 }
 
 .image-text {
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000,
+    1px -1px 0 #000, -1px -1px 0 #000;
   position: absolute;
   top: 27px;
   right: 27px;
@@ -100,6 +101,10 @@
   outline: 2px solid var(--main-color);
   outline-offset: -2px;
   background-color: var(--main-background);
+}
+
+.mobile-break {
+  display: none;
 }
 
 .article__title {
@@ -209,9 +214,16 @@
   mix-blend-mode: difference;
 }
 
-.diskette-large {
-  width: 39px;
-  height: 39px;
+@media (max-width: 375px) {
+  .floppy-button .icon-floppy {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
+.icon-floppy.diskette-large {
+  width: 39px !important;
+  height: 39px !important;
 }
 
 .card__icon-button:focus {
@@ -350,6 +362,14 @@
     max-width: 700px;
   }
 
+  .header__title {
+    padding-bottom: 30px;
+  }
+
+  .header__logo {
+    padding-top: 26px;
+  }
+
   .main {
     align-self: center;
     max-width: 700px;
@@ -364,11 +384,6 @@
     flex-direction: row;
     min-width: 339px;
     min-height: 54px;
-  }
-
-  .icon-floppy-button {
-    width: 21px;
-    height: 21px;
   }
 
   .dialog {
@@ -400,8 +415,7 @@
 
 @media (max-width: 375px) {
   .header {
-    height: 324px;
-    padding: 120px 14px;
+    padding: 97px 14px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -416,24 +430,28 @@
   }
 
   .header__title {
+    padding-top: 14px;
     font-size: 14px;
     line-height: 14px;
   }
-}
 
-.image {
-  min-width: 100%;
-  max-width: 371px;
-  min-height: auto;
-  object-fit: cover;
-}
+  .mobile-break {
+    display: inline;
+  }
 
-.image-text {
-  top: 25px;
-}
+  .image {
+    min-width: 100%;
+    max-width: 371px;
+    min-height: auto;
+    object-fit: cover;
+  }
 
-.icon-floppy {
-  width: 28px;
-  height: 28px;
-}
+  .image-text {
+    right: 13px;
+  }
+
+  .icon-floppy {
+    width: 39px;
+    height: 39px;
+  }
 }
